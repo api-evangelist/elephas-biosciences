@@ -1,0 +1,31 @@
+generated: '2026-08-12'
+method: searched
+source: npm, PyPI, GitHub org search, plus the full elephas.com sitemap
+package_count: 0
+packages: []
+note: 'No first-party Elephas Biosciences client library exists on any public
+  registry. npm has several unrelated packages named "elephas" (a Node/React
+  component set from other publishers and a Keras/Spark project of the same name) —
+  none is affiliated with Elephas Biosciences. There is no Elephas Biosciences
+  GitHub organization. Consistent with the rest of the profile: the company ships a
+  clinician-facing web portal, not a developer platform, so there is nothing to
+  package. Recorded as a verified zero. NO type: SDKs pointer is wired, because no
+  official SDK exists.'
+searched:
+- registry: npm
+  query: elephas
+  url: https://registry.npmjs.org/-/v1/search?text=elephas
+  status: 200
+  first_party_hits: 0
+- registry: pypi
+  package: elephas-biosciences
+  url: https://pypi.org/pypi/elephas-biosciences/json
+  status: 404
+- registry: github
+  query: elephas biosciences (users/orgs)
+  url: https://api.github.com/search/users?q=elephas+biosciences
+  status: 200
+  total_count: 0
+- source: https://elephas.com/sitemap.xml
+  status: 200
+  note: No developer, SDK, downloads or integrations page appears in the sitemap.

@@ -1,18 +1,69 @@
 aid: elephas-biosciences
 name: Elephas Biosciences
-description: 'Elephas Biosciences is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: 'Elephas Biosciences Corporation is a Madison, Wisconsin precision-oncology
+  company that builds elive, a first-in-class functional immune-profiling platform
+  that measures how a patient''s own live tumor tissue responds to immunotherapy. The
+  platform combines elive Edge (an automated instrument that cuts core-needle biopsies
+  into uniform 300-micron viable fragments), elive Gel (a proprietary hydrogel that
+  preserves the native tumor microenvironment) and the elive Method (a sequential
+  treatment and cytokine-analysis strategy) to return a functional response readout
+  within roughly 72 hours of biopsy. Clinicians receive elive test reports through a
+  secure, cloud-based web application; researchers and drug developers receive custom
+  reports plus raw data for in-house analysis. The company raised a $40M Series B-2
+  in November 2025 to commercialize elive as a laboratory developed test. Its digital
+  surface is the Elephas Portal (portal.elephas.com), an Angular single-page
+  application backed by an ASP.NET Core API at portal.elephasapis.com that is
+  authenticated with Azure AD B2C on the company-controlled na.login.elephas.com
+  identity host. No public developer program, API reference or machine-readable
+  contract is published.'
+image: https://elephas.com/hubfs/raw_assets/public/ele_2026/images/ele-logo-tagline.svg
 url: https://raw.githubusercontent.com/api-evangelist/elephas-biosciences/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
 - Company
-apis: []
+- Healthcare
+- Life Sciences
+- Biotechnology
+- Precision Oncology
+- Diagnostics
+- Immunotherapy
+- Clinical Research
+- Laboratory
+- Medical Devices
+apis:
+- aid: elephas-biosciences-portal-api
+  name: Elephas Portal API
+  description: 'The private backend API behind the Elephas Portal, the secure
+    cloud-based web application through which clinicians, laboratories and research
+    partners receive elive test reports and manage specimen registration. Probed
+    live at https://portal.elephasapis.com: an ASP.NET Core (Kestrel) service that
+    answers every path — including /swagger and /swagger/v1/swagger.json — with HTTP
+    401 and a WWW-Authenticate: Bearer challenge. Bearer tokens are issued by Azure
+    AD B2C on the company-controlled host na.login.elephas.com. No public OpenAPI,
+    reference or developer program is published; the observed surface (registration,
+    security, histology, cytokines, cut-culture resources) is inferred only from the
+    portal single-page application bundle and is recorded here as evidence of an API
+    that exists but is not publicly documented.'
+  humanURL: https://portal.elephas.com/
+  baseURL: https://portal.elephasapis.com
+  tags:
+  - Portal
+  - Oncology
+  - Diagnostics
+  - Reports
+  properties:
+  - type: Authentication
+    url: authentication/elephas-biosciences-authentication.yml
+  - type: OAuthScopes
+    url: scopes/elephas-biosciences-scopes.yml
+  - type: ErrorCatalog
+    url: errors/elephas-biosciences-problem-types.yml
+  - type: Conventions
+    url: conventions/elephas-biosciences-conventions.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +71,74 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://elephas.com/
+- type: Login
+  url: https://portal.elephas.com/
+- type: Support
+  url: https://elephas.com/get-in-touch
+- type: Blog
+  url: https://elephas.com/news
+- type: BlogRSS
+  url: https://elephas.com/news/rss.xml
+- type: TermsOfService
+  url: https://elephas.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://elephas.com/privacy-policy
+- type: FAQ
+  url: https://elephas.com/faqs
+- type: Documents
+  url: https://elephas.com/resources/documents
+- type: Publications
+  url: https://elephas.com/resources/publications
+- type: Careers
+  url: https://elephas.com/careers
+- type: LinkedIn
+  url: https://www.linkedin.com/company/elephasbiosciences
+- type: Crunchbase
+  url: https://www.crunchbase.com/organization/elephas-biosciences
+- type: WellKnown
+  url: well-known/elephas-biosciences-well-known.yml
+- type: Authentication
+  url: authentication/elephas-biosciences-authentication.yml
+- type: OAuthScopes
+  url: scopes/elephas-biosciences-scopes.yml
+- type: DomainSecurity
+  url: security/elephas-biosciences-domain-security.yml
+- type: ErrorCatalog
+  url: errors/elephas-biosciences-problem-types.yml
+- type: Conventions
+  url: conventions/elephas-biosciences-conventions.yml
+- type: Conformance
+  url: conformance/elephas-biosciences-conformance.yml
+- type: Plans
+  url: plans/elephas-biosciences-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/elephas-biosciences-rate-limits.yml
+- type: LLMsTxt
+  url: llms/elephas-biosciences-llms.txt
+x-enrichment:
+  date: '2026-08-12'
+  status: minimal
+  artifacts_added: 12
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: 'Elephas runs a real ASP.NET Core API at portal.elephasapis.com behind the
+    Elephas Portal, but every path on it — including /swagger and
+    /swagger/v1/swagger.json — answers HTTP 401 with a WWW-Authenticate: Bearer
+    challenge, and tokens are only issuable to an existing Elephas tenant through
+    Azure AD B2C, so the Swagger contract the service already generates is readable
+    only by active customers.'
+  evidence:
+  - url: https://portal.elephasapis.com/swagger/v1/swagger.json
+    status: 401
+  - url: https://portal.elephasapis.com/swagger
+    status: 401
+  - url: https://elephas.com/developers
+    status: 404
+  - url: https://elephas.com/llms.txt
+    status: 404
+  - url: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/B2C_1A_SMART_HRD_SUSI/v2.0/.well-known/openid-configuration
+    status: 200
+  checked: '2026-08-12'

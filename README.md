@@ -42,5 +42,13 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Elephas Biosciences is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Elephas Biosciences Corporation (Madison, Wisconsin) builds **elive**, a functional immune-profiling platform that measures how a patient's own live tumor tissue responds to immunotherapy — elive Edge (automated cutting of core-needle biopsies into uniform 300-micron viable fragments), elive Gel (a hydrogel preserving the native tumor microenvironment) and the elive Method (sequential treatment plus cytokine analysis). Clinicians receive elive test reports through a secure cloud web application; researchers and drug developers receive custom reports plus raw data.
+
+- Website: https://elephas.com/
+- Portal (customer login): https://portal.elephas.com/
+
+## API surface
+
+Elephas publishes **no public API, developer portal, or machine-readable contract**. A real backend API exists at `https://portal.elephasapis.com` (ASP.NET Core / Kestrel) behind the Elephas Portal, but every path — including `/swagger` and `/swagger/v1/swagger.json` — returns HTTP 401 with a `WWW-Authenticate: Bearer` challenge. Tokens are issued only to existing Elephas tenants via Azure AD B2C on the company-controlled host `na.login.elephas.com`, whose OpenID Connect discovery document is served publicly and is captured in `well-known/`.
+
+See `apis.yml` `x-coverage` for the probed evidence.

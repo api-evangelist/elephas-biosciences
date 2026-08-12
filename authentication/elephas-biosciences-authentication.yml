@@ -1,0 +1,62 @@
+generated: '2026-08-12'
+method: probed
+source: 'https://portal.elephas.com/assets/config/config.json (portal runtime
+  config) + https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/B2C_1A_SMART_HRD_SUSI/v2.0/.well-known/openid-configuration
+  + observed WWW-Authenticate challenge on https://portal.elephasapis.com'
+note: 'DERIVED FROM PROBES, NOT FROM A PUBLISHED SPEC OR AUTH DOC. Elephas publishes
+  no developer documentation and no OpenAPI, so there are no securitySchemes to
+  read. Everything below was observed live: the Bearer challenge on the API host,
+  and the OpenID Connect discovery metadata the company''s own Azure AD B2C identity
+  host serves anonymously.'
+summary:
+  types: [oauth2, openIdConnect, http]
+  api_key_in: []
+  oauth2_flows: [authorizationCode]
+  identity_provider: Azure AD B2C (custom domain)
+  public_registration: false
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  source: 'observed: WWW-Authenticate: Bearer on HTTP 401 from
+    https://portal.elephasapis.com/swagger'
+  applies_to: every path on https://portal.elephasapis.com, including /swagger and
+    /.well-known/*
+- name: AzureAdB2C
+  type: openIdConnect
+  openIdConnectUrl: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/B2C_1A_SMART_HRD_SUSI/v2.0/.well-known/openid-configuration
+  issuer: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/v2.0/
+  authorization_endpoint: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/oauth2/v2.0/authorize
+  token_endpoint: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/oauth2/v2.0/token
+  end_session_endpoint: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/oauth2/v2.0/logout
+  jwks_uri: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/discovery/v2.0/keys
+  policy: B2C_1A_SMART_HRD_SUSI
+  policy_kind: custom policy (Identity Experience Framework), home-realm-discovery
+    sign-up/sign-in
+  response_types_supported: [code, code id_token, code token, code id_token token,
+    id_token, id_token token, token, token id_token]
+  response_modes_supported: [query, fragment, form_post]
+  token_endpoint_auth_methods_supported: [client_secret_post, client_secret_basic]
+  id_token_signing_alg_values_supported: [RS256]
+  subject_types_supported: [pairwise]
+  claims_supported: [firstname, surname, idp, email, sub, identityProviders,
+    isForgotPassword, iss, iat, exp, aud, acr, nonce, auth_time]
+  federation: 'The SMART_HRD policy name plus the identityProviders and idp claims
+    indicate home-realm discovery — institutional users are federated to their own
+    identity provider rather than holding local Elephas credentials.'
+  source: well-known/elephas-biosciences-openid-configuration.json
+client:
+  type: public (browser SPA, MSAL.js)
+  flow: authorization code with PKCE
+  note: The Elephas Portal is an Angular application using MSAL; the client id is
+    public by construction and is intentionally not recorded here.
+gaps:
+- No published authentication documentation, developer portal, or token-issuance
+  guide exists on any Elephas host.
+- The discovery document advertises implicit and hybrid response types (token,
+  id_token token) alongside authorization code; this is Azure AD B2C's default
+  advertisement, not necessarily an enabled application configuration.
+- scopes_supported in the discovery document lists only "openid"; the resource scope
+  is configured on the application rather than advertised. See
+  scopes/elephas-biosciences-scopes.yml.

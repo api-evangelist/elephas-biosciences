@@ -1,0 +1,47 @@
+generated: '2026-08-12'
+method: probed
+source: live unauthenticated responses from https://portal.elephasapis.com
+format: custom-json-envelope
+rfc9457: false
+note: 'DERIVED FROM OBSERVED LIVE RESPONSES ONLY. Elephas publishes no OpenAPI and
+  no error reference, so this catalog covers exactly what an unauthenticated caller
+  can observe. It is not a complete error registry and must not be read as one.'
+envelope:
+  media_type: application/json
+  shape:
+    status: integer — HTTP status code, repeated inside the body
+    error: boolean — true on failure; absent on the success envelope
+    errorDetails:
+      summary: string — human-readable message
+  success_shape:
+    status: integer
+    message: string
+    data: string|object — payload
+  observations:
+  - The envelope duplicates the HTTP status code in the body, which is an
+    anti-pattern RFC 9457 explicitly avoids.
+  - No type URI, no title/detail/instance fields, no machine-readable error code —
+    an agent cannot branch on anything but the status integer and a prose summary.
+  - Content type is application/json, not application/problem+json.
+problems:
+- status: 401
+  title: Request denied. Unauthorized access.
+  detail: Returned for every path on the API host when no Bearer token is presented,
+    including /swagger, /health and /.well-known/*.
+  body: '{"status":401,"error":true,"errorDetails":{"summary":"Request denied.
+    Unauthorized access."}}'
+  headers:
+    www-authenticate: Bearer
+  observed_on:
+  - https://portal.elephasapis.com/health
+  - https://portal.elephasapis.com/api-docs
+  - https://portal.elephasapis.com/security/users
+  - https://portal.elephasapis.com/registration
+  remediation: Acquire a Bearer token from the Azure AD B2C authorization code flow
+    documented in authentication/elephas-biosciences-authentication.yml. Token
+    issuance requires an Elephas tenant account; there is no public sign-up.
+problem_count: 1
+gaps:
+- No 4xx/5xx catalog is published; only the 401 is observable anonymously.
+- No stable error codes or type URIs are emitted, so error handling cannot be
+  written against a contract.

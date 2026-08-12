@@ -1,0 +1,24 @@
+generated: '2026-08-12'
+method: probed
+source: response headers observed on https://portal.elephasapis.com
+limit_count: 0
+limits: []
+headers_observed: []
+documented: false
+note: 'No rate limits are documented — Elephas publishes no developer documentation
+  at all. Probing the live API host returned no RateLimit-*, X-RateLimit-*,
+  RateLimit-Policy or Retry-After header on any response, and no 429 was observed.
+  Because every endpoint answers 401 without a token, any limits that exist are only
+  observable to an authenticated tenant. Recorded as an honest zero: nothing
+  published, nothing signalled on the surface a client can see.'
+probes:
+- url: https://portal.elephasapis.com/
+  status: 200
+  rate_limit_headers: none
+- url: https://portal.elephasapis.com/health
+  status: 401
+  rate_limit_headers: none
+- url: https://portal.elephasapis.com/swagger
+  status: 401
+  rate_limit_headers: none
+exhaustion_status: unknown

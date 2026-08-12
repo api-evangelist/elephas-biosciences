@@ -1,0 +1,36 @@
+generated: '2026-08-12'
+method: probed
+source: 'https://portal.elephas.com/assets/config/config.json (Scope value requested
+  by the Elephas Portal SPA) + well-known/elephas-biosciences-openid-configuration.json'
+docs: null
+docs_note: Elephas publishes no scopes or permissions reference. Both scopes below
+  were observed, not documented.
+schemes:
+- name: AzureAdB2C
+  type: openIdConnect
+  source: well-known/elephas-biosciences-openid-configuration.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/oauth2/v2.0/authorize
+    tokenUrl: https://na.login.elephas.com/bf865bf1-740f-49ec-922c-9b2c233faa13/b2c_1a_smart_hrd_susi/oauth2/v2.0/token
+scopes:
+- scope: openid
+  description: Standard OpenID Connect scope; the only value advertised in
+    scopes_supported by the B2C discovery document.
+  flows: [authorizationCode]
+  sources: [well-known/elephas-biosciences-openid-configuration.json]
+- scope: https://elephasus.onmicrosoft.com/prod/api/User.Read
+  description: 'Resource scope the Elephas Portal requests for the production
+    backend API. The application id URI (elephasus.onmicrosoft.com/prod/api) names
+    the Elephas Portal API resource; User.Read is the delegated permission the
+    browser client asks for on the signed-in user''s behalf.'
+  resource: elephasus.onmicrosoft.com/prod/api
+  flows: [authorizationCode]
+  sources: [https://portal.elephas.com/assets/config/config.json]
+scope_count: 2
+coverage_note: 'This is the complete OBSERVABLE scope surface, not necessarily the
+  complete one. Azure AD B2C does not advertise resource scopes in discovery, so any
+  additional delegated or application permissions the API defines are only visible
+  to an authenticated tenant administrator. A single User.Read-style delegated scope
+  fronting an entire clinical reporting API suggests authorization is enforced
+  server-side by role rather than by OAuth scope.'

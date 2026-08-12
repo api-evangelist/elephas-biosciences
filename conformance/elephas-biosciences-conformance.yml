@@ -1,0 +1,70 @@
+generated: '2026-08-12'
+method: probed
+source: derived from probed evidence in well-known/, authentication/, errors/ and
+  security/ — no OpenAPI exists for this provider
+note: 'Elephas publishes no compliance program, no trust center and no certification
+  page. Nothing below is a provider claim; each entry is an assertion about what the
+  probed surface does or does not demonstrate. Deliberately NOT wired as a
+  type: Compliance pointer, because no published compliance posture was found.'
+standards:
+- id: oauth2
+  conforms: true
+  evidence: 'Authorization code flow with authorize/token endpoints served by Azure
+    AD B2C at na.login.elephas.com; Bearer challenge on the API host.'
+- id: oidc-discovery
+  conforms: true
+  evidence: RFC 8414 / OIDC Discovery document served at
+    /<tenant>/<policy>/v2.0/.well-known/openid-configuration with issuer, jwks_uri
+    and endpoint metadata.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Errors use a custom {status,error,errorDetails.summary} JSON envelope
+    with content type application/json, not application/problem+json.'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on elephas.com and 401 on the API
+    host; no security.txt is served anywhere.
+- id: rfc8615-well-known-uris
+  conforms: partial
+  evidence: The identity host serves a compliant well-known document; the corporate
+    site serves none, and the portal SPA answers 200 with an HTML shell for every
+    /.well-known/ path, which violates the expectation that an unserved well-known
+    URI return 404.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger document is reachable on any host; /swagger and
+    /swagger/v1/swagger.json on the API host return 401.
+- id: a2a-agent-card
+  conforms: false
+  evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json
+    on any host.
+- id: hsts
+  conforms: true
+  evidence: 'strict-transport-security: max-age=31536000;includeSubdomains on
+    elephas.com, portal.elephas.com, portal.elephasapis.com and
+    na.login.elephas.com.'
+- id: tls-chain-completeness
+  conforms: false
+  evidence: portal.elephas.com and portal.elephasapis.com serve the leaf certificate
+    without its Sectigo intermediate; openssl returns verify code 21.
+- id: dnssec
+  conforms: false
+  evidence: No DNSSEC on elephas.com or elephasapis.com.
+- id: caa
+  conforms: false
+  evidence: No CAA records on either domain.
+regulatory_context:
+  note: 'Elephas operates a CLIA-style clinical laboratory workflow and is
+    commercializing elive as a laboratory developed test, which places it in scope
+    for HIPAA and US clinical-laboratory regulation. NO published attestation,
+    certification or trust page was found on any Elephas host — this is a
+    contextual note about the sector, not a compliance claim about the company.'
+  probed:
+  - url: https://elephas.com/privacy-policy
+    status: 200
+  - url: https://elephas.com/terms-of-service
+    status: 200
+  - url: https://trust.elephas.com
+    status: NXDOMAIN
+  - url: https://security.elephas.com
+    status: NXDOMAIN

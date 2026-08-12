@@ -1,0 +1,30 @@
+generated: '2026-08-12'
+method: searched
+source: https://elephas.com/products-services/research
+searched:
+- url: https://elephas.com/products-services/research
+  status: 200
+- url: https://elephas.com/products-services/early-access-program
+  status: 200
+- url: https://elephas.com/products-services-pharma
+  status: 200
+- url: https://elephas.com/get-in-touch
+  status: 200
+plan_count: 0
+plans: []
+note: 'Elephas publishes NO pricing of any kind — no API plans, no tiers, no rate
+  card, no published list price for the elive test or the platform. Access is
+  arranged through a contact form and an early-access program. This is a clinical
+  diagnostics and biopharma-services company, not a commercial API business, so the
+  absence of API plans is expected rather than a gap.'
+commercial_model:
+  described_on: https://elephas.com/products-services/research
+  terms_stated:
+  - Licensing of the elive Edge instrument.
+  - Consumables purchased per sample.
+  - An annual no-fee license for the elive Method, contingent on citation
+    requirements.
+  prices_published: false
+  note: These are the commercial terms the research page states in prose. No
+    monetary amounts are published anywhere on the site.
+api_plans_published: false
