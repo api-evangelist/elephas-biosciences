@@ -1,0 +1,21 @@
+{
+  "repo": "elephas-biosciences",
+  "feeds": [
+    {
+      "source": "https://elephas.com/get-in-touch",
+      "feed_url": "https://elephas.com/get-in-touch",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://elephas.com/news",
+      "feed_url": "https://elephas.com/news/rss.xml",
+      "title": "",
+      "saved": 1,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 1,
+  "fetched": "2026-08-15T12:22:01Z"
+}
