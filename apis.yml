@@ -16,6 +16,17 @@ description: 'Elephas Biosciences Corporation is a Madison, Wisconsin precision-
   authenticated with Azure AD B2C on the company-controlled na.login.elephas.com
   identity host. No public developer program, API reference or machine-readable
   contract is published.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://elephas.com/hubfs/raw_assets/public/ele_2026/images/ele-logo-tagline.svg
 url: https://raw.githubusercontent.com/api-evangelist/elephas-biosciences/refs/heads/main/apis.yml
 x-type: company
