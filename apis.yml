@@ -27,6 +27,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://elephas.com/hubfs/raw_assets/public/ele_2026/images/ele-logo-tagline.svg
 url: https://raw.githubusercontent.com/api-evangelist/elephas-biosciences/refs/heads/main/apis.yml
 x-type: company
