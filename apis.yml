@@ -1,21 +1,17 @@
 aid: elephas-biosciences
 name: Elephas Biosciences
-description: 'Elephas Biosciences Corporation is a Madison, Wisconsin precision-oncology
-  company that builds elive, a first-in-class functional immune-profiling platform
-  that measures how a patient''s own live tumor tissue responds to immunotherapy. The
-  platform combines elive Edge (an automated instrument that cuts core-needle biopsies
-  into uniform 300-micron viable fragments), elive Gel (a proprietary hydrogel that
-  preserves the native tumor microenvironment) and the elive Method (a sequential
-  treatment and cytokine-analysis strategy) to return a functional response readout
-  within roughly 72 hours of biopsy. Clinicians receive elive test reports through a
-  secure, cloud-based web application; researchers and drug developers receive custom
-  reports plus raw data for in-house analysis. The company raised a $40M Series B-2
-  in November 2025 to commercialize elive as a laboratory developed test. Its digital
-  surface is the Elephas Portal (portal.elephas.com), an Angular single-page
-  application backed by an ASP.NET Core API at portal.elephasapis.com that is
-  authenticated with Azure AD B2C on the company-controlled na.login.elephas.com
-  identity host. No public developer program, API reference or machine-readable
-  contract is published.'
+description: Elephas Biosciences Corporation is a Madison, Wisconsin precision-oncology company that builds
+  elive, a first-in-class functional immune-profiling platform that measures how a patient's own live
+  tumor tissue responds to immunotherapy. The platform combines elive Edge (an automated instrument that
+  cuts core-needle biopsies into uniform 300-micron viable fragments), elive Gel (a proprietary hydrogel
+  that preserves the native tumor microenvironment) and the elive Method (a sequential treatment and cytokine-analysis
+  strategy) to return a functional response readout within roughly 72 hours of biopsy. Clinicians receive
+  elive test reports through a secure, cloud-based web application; researchers and drug developers receive
+  custom reports plus raw data for in-house analysis. The company raised a $40M Series B-2 in November
+  2025 to commercialize elive as a laboratory developed test. Its digital surface is the Elephas Portal
+  (portal.elephas.com), an Angular single-page application backed by an ASP.NET Core API at portal.elephasapis.com
+  that is authenticated with Azure AD B2C on the company-controlled na.login.elephas.com identity host.
+  No public developer program, API reference or machine-readable contract is published.
 deliveryModel:
   model: saas
   open_source: false
@@ -61,19 +57,16 @@ tags:
 - Laboratory
 - Medical Devices
 apis:
-- aid: elephas-biosciences-portal-api
+- aid: elephas-biosciences:elephas-biosciences-portal-api
   name: Elephas Portal API
-  description: 'The private backend API behind the Elephas Portal, the secure
-    cloud-based web application through which clinicians, laboratories and research
-    partners receive elive test reports and manage specimen registration. Probed
-    live at https://portal.elephasapis.com: an ASP.NET Core (Kestrel) service that
-    answers every path — including /swagger and /swagger/v1/swagger.json — with HTTP
-    401 and a WWW-Authenticate: Bearer challenge. Bearer tokens are issued by Azure
-    AD B2C on the company-controlled host na.login.elephas.com. No public OpenAPI,
-    reference or developer program is published; the observed surface (registration,
-    security, histology, cytokines, cut-culture resources) is inferred only from the
-    portal single-page application bundle and is recorded here as evidence of an API
-    that exists but is not publicly documented.'
+  description: 'The private backend API behind the Elephas Portal, the secure cloud-based web application
+    through which clinicians, laboratories and research partners receive elive test reports and manage
+    specimen registration. Probed live at https://portal.elephasapis.com: an ASP.NET Core (Kestrel) service
+    that answers every path — including /swagger and /swagger/v1/swagger.json — with HTTP 401 and a WWW-Authenticate:
+    Bearer challenge. Bearer tokens are issued by Azure AD B2C on the company-controlled host na.login.elephas.com.
+    No public OpenAPI, reference or developer program is published; the observed surface (registration,
+    security, histology, cytokines, cut-culture resources) is inferred only from the portal single-page
+    application bundle and is recorded here as evidence of an API that exists but is not publicly documented.'
   humanURL: https://portal.elephas.com/
   baseURL: https://portal.elephasapis.com
   tags:
@@ -150,12 +143,10 @@ x-enrichment:
 x-coverage:
   state: gated
   reason: customer-only-docs
-  detail: 'Elephas runs a real ASP.NET Core API at portal.elephasapis.com behind the
-    Elephas Portal, but every path on it — including /swagger and
-    /swagger/v1/swagger.json — answers HTTP 401 with a WWW-Authenticate: Bearer
-    challenge, and tokens are only issuable to an existing Elephas tenant through
-    Azure AD B2C, so the Swagger contract the service already generates is readable
-    only by active customers.'
+  detail: 'Elephas runs a real ASP.NET Core API at portal.elephasapis.com behind the Elephas Portal, but
+    every path on it — including /swagger and /swagger/v1/swagger.json — answers HTTP 401 with a WWW-Authenticate:
+    Bearer challenge, and tokens are only issuable to an existing Elephas tenant through Azure AD B2C,
+    so the Swagger contract the service already generates is readable only by active customers.'
   evidence:
   - url: https://portal.elephasapis.com/swagger/v1/swagger.json
     status: 401
